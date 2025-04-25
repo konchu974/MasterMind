@@ -79,21 +79,21 @@ public class Application {
             }
         }
 
-        // TODO Remplacer la boucle FOR par une boucle while ou Do/while
-        // Une boucle FOR est faite pour aller parcourir tous les index prévus au début
-        // En ajoutant des continue ou des break, on complique la lisibilité de
-        // l'algorithme et donc la maintenabilité
-
-        for (int i = 0; i < colorToGuess.size(); i++) {
-            if (keyGuess[i])
-                continue;
-            for (int j = 0; j < colorTry.size(); j++) {
-                if (!keyToFind[j] && colorTry.get(i) == colorToGuess.get(j)) {
-                    contain++;
-                    keyToFind[j] = true;
-                    break;
+        int i = 0;
+        while (i < colorToGuess.size()) {
+            if (!keyGuess[i]) {
+                int j = 0;
+                boolean found = false;
+                while (j < colorTry.size() && !found) {
+                    if (!keyToFind[j] && colorTry.get(i) == colorToGuess.get(j)) {
+                        contain++;
+                        keyToFind[j] = true;
+                        found = true;
+                    }
+                    j++;
                 }
             }
+            i++;
         }
 
         if (equal != 4) {
