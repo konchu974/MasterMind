@@ -33,10 +33,8 @@ public class Application {
         JButton vert = new JButton();
         vert.setBackground(Color.GREEN);
 
-
         JButton bleu = new JButton();
         bleu.setBackground(Color.BLUE);
-
 
         JButton jaune = new JButton();
         jaune.setBackground(Color.YELLOW);
@@ -52,13 +50,11 @@ public class Application {
             panel.add(new JLabel());
         }
 
-
         System.out.println("Entrez votre code à 4 chiffres que vous voulez faire deviner:");
         rouge.addActionListener(e -> handleColorClick("rouge"));
         vert.addActionListener(e -> handleColorClick("vert"));
         bleu.addActionListener(e -> handleColorClick("bleu"));
         jaune.addActionListener(e -> handleColorClick("jaune"));
-
 
         // Ajouter le panneau à la fenêtre
         frame.add(panel);
@@ -68,16 +64,12 @@ public class Application {
 
     }
 
-
-
-    public static void gameLogic(List<String> colorToGuess, List<String> colorTry){
+    public static void gameLogic(List<String> colorToGuess, List<String> colorTry) {
         int equal = 0;
         int contain = 0;
 
-
         boolean[] keyToFind = new boolean[4];
         boolean[] keyGuess = new boolean[4];
-
 
         for (int i = 0; i < colorToGuess.size(); i++) {
             if (colorTry.get(i) == colorToGuess.get(i)) {
@@ -87,8 +79,14 @@ public class Application {
             }
         }
 
+        // TODO Remplacer la boucle FOR par une boucle while ou Do/while
+        // Une boucle FOR est faite pour aller parcourir tous les index prévus au début
+        // En ajoutant des continue ou des break, on complique la lisibilité de
+        // l'algorithme et donc la maintenabilité
+
         for (int i = 0; i < colorToGuess.size(); i++) {
-            if (keyGuess[i]) continue;
+            if (keyGuess[i])
+                continue;
             for (int j = 0; j < colorTry.size(); j++) {
                 if (!keyToFind[j] && colorTry.get(i) == colorToGuess.get(j)) {
                     contain++;
@@ -98,7 +96,6 @@ public class Application {
             }
         }
 
-
         if (equal != 4) {
             nbTry--;
             System.out.println("il y a " + equal + " couleurs au bon endroit et " + contain +
@@ -107,7 +104,8 @@ public class Application {
             System.out.println("Bravo");
             resetGame();
 
-        } if (nbTry == 0) {
+        }
+        if (nbTry == 0) {
             System.out.println("Dommage ! Vous avez perdu. Le code était : " + colorToGuess);
             resetGame();
         }
@@ -139,6 +137,4 @@ public class Application {
         System.out.println("\nNouvelle partie ! Entrez un nouveau code à 4 couleurs :");
     }
 
-
 }
-
